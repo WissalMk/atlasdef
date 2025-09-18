@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0F2C59;
+  --secondary: #3E92CC;
+  --accent: #2EC4B6;
+  --warning: #F9C846;
+  --error: #E63946;
+  --success: #43AA8B;
+  --background: #F8F9FA;
+  --text-dark: #192333;
+  --text-light: #F8F9FA;
+  --text-muted: #6B7280;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-text-dark font-sans;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-bold text-primary;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl leading-snug;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+/* Remove any default margins and ensure smooth transitions */
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Ensure sections connect seamlessly with no white lines or gaps */
+section {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+section + section {
+  margin-top: 0;
+  border-top: none;
+}
+
+/* Remove any potential white lines or borders */
+section::before,
+section::after {
+  display: none;
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md transition-all duration-300 focus:outline-none;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary hover:bg-opacity-90;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary hover:bg-opacity-90;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent hover:bg-opacity-90;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-lg overflow-hidden;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply mb-12 text-center;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-text-muted mb-4 text-center;
+  }
+}
+
+/* Custom animations for infinite scroll */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.scroll-right {
+  animation: scroll-right 30s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scroll-left,
+  .scroll-right {
+    animation-duration: 20s;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-left,
+  .scroll-right {
+    animation-duration: 15s;
+  }
+}
+
+/* 3D Background Effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes data-flow {
+  0% { 
+    stroke-dasharray: 0 100;
+    opacity: 0;
+  }
+  50% {
+    stroke-dasharray: 50 50;
+    opacity: 1;
+  }
+  100% { 
+    stroke-dasharray: 100 0;
+    opacity: 0;
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.data-flow {
+  animation: data-flow 3s ease-in-out infinite;
+}
+
+/* Cybersecurity themed gradients */
+.cyber-gradient-1 {
+  background: linear-gradient(135deg, #0F2C59 0%, #1e3a8a 50%, #2563eb 100%);
+}
+
+.cyber-gradient-2 {
+  background: linear-gradient(135deg, #2EC4B6 0%, #3E92CC 50%, #0F2C59 100%);
+}
+
+.cyber-gradient-3 {
+  background: radial-gradient(circle at 30% 70%, rgba(46, 196, 182, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, rgba(62, 146, 204, 0.3) 0%, transparent 50%),
+              linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(15, 44, 89, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 44, 89, 0.2);
+}
+
+/* Enhanced shadow for feature cards */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Professional typography improvements */
+.font-light {
+  font-weight: 300;
+}
+
+/* Enhanced professional shadows */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Professional button hover effects */
+.btn-professional {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-professional::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-professional:hover::before {
+  left: 100%;
+}
