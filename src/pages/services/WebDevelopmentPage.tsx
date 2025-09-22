@@ -16,46 +16,68 @@ const SectionTitle = ({ children, subtitle }) => (
 );
 
 const TechnologyGrid = ({ technologies }) => {
-  return (
-    <div className="space-y-12">
-      {Object.entries(technologies).map(([category, logos], categoryIndex) => (
-        <motion.div
-          key={category}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          {/* Category Title */}
-          <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center justify-center">
-            <div className="w-8 h-0.5 bg-blue-600 mr-4"></div>
-            {category}
-            <div className="w-8 h-0.5 bg-blue-600 ml-4"></div>
-          </h3>
+  // Flatten all logos into a single array
+  const allLogos = Object.values(technologies).flat();
 
-          {/* Technology Logos Row */}
-          <div className="flex flex-wrap justify-center items-center gap-6 max-w-5xl mx-auto">
-            {logos.map((logo, logoIndex) => (
-              <motion.div
-                key={logoIndex}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: logoIndex * 0.05 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className="w-20 h-20 bg-white rounded-xl shadow-md flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:scale-110 border border-gray-100">
-                  <img
-                    src={logo}
-                    alt="Technology logo"
-                    className="max-h-12 max-w-12 object-contain filter group-hover:brightness-110 transition-all duration-300"
-                  />
-                </div>
-              </motion.div>
+  // Ensure we have enough logos by duplicating if needed
+  const minLogosNeeded = 30; // Minimum logos per row for good carousel effect
+  let extendedLogos = [...allLogos];
+  while (extendedLogos.length < minLogosNeeded * 3) {
+    extendedLogos = [...extendedLogos, ...allLogos];
+  }
+
+  // Split logos into 3 equal rows
+  const logosPerRow = Math.floor(extendedLogos.length / 3);
+  const rows = [
+    extendedLogos.slice(0, logosPerRow),
+    extendedLogos.slice(logosPerRow, logosPerRow * 2),
+    extendedLogos.slice(logosPerRow * 2, logosPerRow * 3)
+  ];
+
+  return (
+    <div className="space-y-8 py-8 overflow-hidden">
+      {rows.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className="relative overflow-hidden"
+        >
+          <motion.div
+            className="flex items-center gap-6"
+            animate={{
+              x: rowIndex % 2 === 0
+                ? [0, -2000]
+                : [-2000, 0]
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 30 + rowIndex * 5,
+                ease: "linear"
+              }
+            }}
+          >
+            {/* Create multiple copies for seamless infinite scroll */}
+            {Array.from({ length: 4 }).map((_, copyIndex) => (
+              <React.Fragment key={copyIndex}>
+                {row.map((logo, logoIndex) => (
+                  <div
+                    key={`${copyIndex}-${logoIndex}`}
+                    className="flex-shrink-0"
+                  >
+                    <div className="w-20 h-20 bg-white rounded-lg shadow-md flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:scale-110 border border-gray-100 p-3 mx-3">
+                      <img
+                        src={logo}
+                        alt="Technology logo"
+                        className="max-h-12 max-w-12 object-contain filter hover:brightness-110 transition-all duration-300"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </React.Fragment>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -455,13 +477,13 @@ const WebDevelopmentPage = () => {
 
   const technologies = {
     "Front-end Development": ["/Logos/react.svg", "/Logos/nextjs.svg", "/Logos/vue.svg", "/Logos/nuxt.svg", "/Logos/angular.svg", "/Logos/svelte.svg", "/Logos/typescript.svg", "/Logos/javascript.svg"],
-    "Build Tools & Standards": ["/Logos/vite.svg", "/Logos/webpack.svg", "/Logos/babel.svg", "/Logos/eslint.svg", "/Logos/prettier.svg", "/Logos/html5.svg", "/Logos/css3.svg"],
+    "Build Tools & Standards": ["/Logos/webpack.svg", "/Logos/babel.svg", "/Logos/eslint.svg", "/Logos/prettier.svg", "/Logos/html5.svg", "/Logos/css3.svg"],
     "UI/UX & Styling": ["/Logos/tailwindcss.svg", "/Logos/bootstrap.svg", "/Logos/material-ui.svg", "/Logos/sass.svg", "/Logos/figma.svg", "/Logos/adobe-xd.svg", "/Logos/sketch.svg"],
     "Back-end Development": ["/Logos/nodejs.svg", "/Logos/laravel.svg", "/Logos/django.svg", "/Logos/fastapi.svg", "/Logos/springboot.svg", "/Logos/dotnet.svg", "/Logos/php.svg", "/Logos/python.svg"],
     "Database Management": ["/Logos/mysql.svg", "/Logos/postgresql.svg", "/Logos/mongodb.svg", "/Logos/redis.svg", "/Logos/elasticsearch.svg", "/Logos/oracle.svg", "/Logos/sql-server.svg", "/Logos/sqlite.svg"],
-    "DevOps & Automation": ["/Logos/docker.svg", "/Logos/kubernetes.svg", "/Logos/jenkins.svg", "/Logos/gitlab-ci.svg", "/Logos/github-actions.svg", "/Logos/terraform.svg", "/Logos/ansible.svg"],
+    "DevOps & Automation": ["/Logos/docker.svg", "/Logos/kubernetes.svg", "/Logos/jenkins.svg", "/Logos/gitlab-ci.svg", "/Logos/terraform.svg", "/Logos/ansible.svg"],
     "Cloud & Hosting": ["/Logos/aws.svg", "/Logos/azure.svg", "/Logos/google-cloud.svg", "/Logos/digitalocean.svg", "/Logos/vercel.svg", "/Logos/netlify.svg", "/Logos/cloudflare.svg"],
-    "Web Servers & Security": ["/Logos/nginx.svg", "/Logos/apache.svg", "/Logos/cloudflare.svg", "/Logos/ssl.svg", "/Logos/lets-encrypt.svg", "/Logos/owasp.svg", "/Logos/waf.svg", "/Logos/ddos-protection.svg"],
+    "Web Servers & Security": ["/Logos/nginx.svg", "/Logos/apache.svg", "/Logos/cloudflare.svg", "/Logos/lets-encrypt.svg"],
     "CMS & E-commerce": ["/Logos/wordpress.svg", "/Logos/woocommerce.svg", "/Logos/shopify.svg", "/Logos/magento.svg", "/Logos/drupal.svg", "/Logos/strapi.svg", "/Logos/contentful.svg"]
   };
 
@@ -762,58 +784,43 @@ const WebDevelopmentPage = () => {
       </section>
 
       {/* Get in Touch Section */}
-      <section className="py-20 bg-gray-900 relative overflow-hidden">
+      <section className="py-20 bg-gray-50 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            {/* Left side - Contact Form */}
             <motion.div
-              className="relative"
+              className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="relative">
-                <img
-                  src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2"
-                  alt="Professional working on laptop"
-                  className="rounded-lg shadow-2xl w-full h-auto"
-                />
-                {/* Blue accent square */}
-                <div className="absolute -top-6 -left-6 w-24 h-24 bg-blue-600 rounded-lg"></div>
-              </div>
-            </motion.div>
-
-            {/* Right side - Contact Form */}
-            <motion.div
-              className="text-white"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
+              {/* Header */}
               <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <div className="w-1 h-12 bg-blue-600 mr-4"></div>
-                  <span className="text-blue-400 font-semibold text-sm uppercase tracking-wider">GET IN TOUCH</span>
+                  <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Contact Us</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">Send us a Message</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">
+                  Get Every Single<br />Update Here
+                </h2>
               </div>
 
+              {/* Contact Form */}
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <input
                       type="text"
-                      placeholder="Name"
-                      className="w-full px-4 py-3 bg-white text-gray-900 rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-500"
+                      placeholder="Your Name"
+                      className="w-full px-0 py-3 bg-transparent text-gray-900 border-0 border-b border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-500 transition-all duration-200"
                     />
                   </div>
                   <div>
                     <input
-                      type="tel"
-                      placeholder="Phone"
-                      className="w-full px-4 py-3 bg-white text-gray-900 rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-500"
+                      type="email"
+                      placeholder="Your Email"
+                      className="w-full px-0 py-3 bg-transparent text-gray-900 border-0 border-b border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-500 transition-all duration-200"
                     />
                   </div>
                 </div>
@@ -821,16 +828,16 @@ const WebDevelopmentPage = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <input
-                      type="email"
-                      placeholder="Email"
-                      className="w-full px-4 py-3 bg-white text-gray-900 rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-500"
+                      type="tel"
+                      placeholder="Phone"
+                      className="w-full px-0 py-3 bg-transparent text-gray-900 border-0 border-b border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-500 transition-all duration-200"
                     />
                   </div>
                   <div>
                     <input
-                      type="url"
-                      placeholder="Website URL"
-                      className="w-full px-4 py-3 bg-white text-gray-900 rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-500"
+                      type="text"
+                      placeholder="Website"
+                      className="w-full px-0 py-3 bg-transparent text-gray-900 border-0 border-b border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-500 transition-all duration-200"
                     />
                   </div>
                 </div>
@@ -838,20 +845,44 @@ const WebDevelopmentPage = () => {
                 <div>
                   <textarea
                     placeholder="Message"
-                    rows={6}
-                    className="w-full px-4 py-3 bg-white text-gray-900 rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-500 resize-none"
+                    rows={5}
+                    className="w-full px-0 py-3 bg-transparent text-gray-900 border-0 border-b border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-500 resize-none transition-all duration-200"
                   ></textarea>
                 </div>
 
-                <div>
+                <div className="pt-4">
                   <button
                     type="submit"
-                    className="bg-blue-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
-                    Send Message
+                    Submit Now
                   </button>
                 </div>
               </form>
+            </motion.div>
+
+            {/* Right side - Illustration */}
+            <motion.div
+              className="order-1 lg:order-2 flex justify-center lg:justify-end"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative max-w-lg w-full">
+                {/* You can replace this with the actual illustration from your design */}
+                <div className="relative">
+                  <img
+                    src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2"
+                    alt="Professional working on laptop with design elements"
+                    className="w-full h-auto rounded-lg"
+                  />
+                  {/* Decorative elements to match the illustration style */}
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-blue-100 rounded-full opacity-80"></div>
+                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-100 rounded-full opacity-80"></div>
+                  <div className="absolute top-1/2 -right-8 w-8 h-8 bg-yellow-100 rounded-full opacity-80"></div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>

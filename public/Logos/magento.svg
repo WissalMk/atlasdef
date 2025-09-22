@@ -1,3 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#EE672F">
-  <path d="M12 24l-4.455-2.572v-12l2.97-1.714v12.857L12 21.428l1.485-.857V8.714l2.97 1.714v12L12 24zM22.391 6.857L12 .857 1.609 6.857v10.286L12 23.143l10.391-6V6.857zM12 2.571l8.609 4.972v8.914L12 21.429l-8.609-4.972V7.543L12 2.571z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="-4.5 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Magento-color</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Color-" transform="translate(-502.000000, -756.000000)" fill="#F37B1F">
+            <path d="M524.485738,756 L502,769.845031 L502,796.153194 L507.839726,799.649354 L507.839726,773.338234 L524.490395,763.049703 L541.156199,773.323445 L541.224888,773.363671 L541.217321,799.610311 L547,796.153194 L547,769.845031 L524.485738,756 Z M527.462066,802.956805 L524.485738,804.805451 L521.507082,802.946748 L521.507082,772.220764 L513.794127,777.046767 L513.794127,803.351971 L524.485738,810 L535.267576,803.304646 L535.267576,777.030203 L527.462066,772.197101 L527.462066,802.956805 Z" id="Magento">
+
+</path>
+        </g>
+    </g>
 </svg>
