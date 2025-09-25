@@ -43,7 +43,7 @@ const VirtualizationPage = () => {
     }, [isInView, end, duration]);
 
     return (
-      <span ref={ref} className="text-4xl md:text-5xl font-bold text-yellow-400">
+      <span ref={ref} className="text-4xl md:text-5xl font-bold" style={{ color: '#FDEB9E' }}>
         {prefix}{count}{suffix}
       </span>
     );
@@ -60,7 +60,7 @@ const VirtualizationPage = () => {
         { name: 'vSAN', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vmware.svg/1024px-Vmware.svg.png' },
         { name: 'NSX', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vmware.svg/1024px-Vmware.svg.png' }
       ],
-      gradient: 'from-blue-600 to-blue-700'
+      gradient: 'custom-blue'
     },
     {
       id: 'proxmox',
@@ -72,7 +72,7 @@ const VirtualizationPage = () => {
         { name: 'LXC', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png' },
         { name: 'Ceph Storage', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png' }
       ],
-      gradient: 'from-yellow-500 to-yellow-600'
+      gradient: 'custom-yellow'
     },
     {
       id: 'nutanix',
@@ -84,7 +84,7 @@ const VirtualizationPage = () => {
         { name: 'Nutanix Files', logo: '/Logos/Nutanix_Logo.svg' },
         { name: 'Flow Security', logo: '/Logos/Nutanix_Logo.svg' }
       ],
-      gradient: 'from-blue-500 to-indigo-600'
+      gradient: 'custom-blue-alt'
     },
     {
       id: 'hyper-v',
@@ -96,19 +96,19 @@ const VirtualizationPage = () => {
         { name: 'Failover Clustering', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png' },
         { name: 'Storage Spaces', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png' }
       ],
-      gradient: 'from-yellow-400 to-amber-500'
+      gradient: 'custom-yellow-alt'
     },
     {
       id: 'xcp-ng',
       title: 'XCP-ng',
       description: 'Open-source Xen-based virtualization platform.',
       tools: [
-        { name: 'XCP-ng', logo: '/Logos/xcpng_logo.png' },
-        { name: 'Xen Orchestra', logo: '/Logos/xcpng_logo.png' },
+        { name: 'XCP-ng', logo: '/Logos/xcp-ng.png' },
+        { name: 'Xen Orchestra', logo: '/Logos/xen-orchestra.png' },
         { name: 'XOSAN', logo: '/Logos/xcpng_logo.png' },
         { name: 'XenMotion', logo: '/Logos/xcpng_logo.png' }
       ],
-      gradient: 'from-blue-700 to-blue-800'
+      gradient: 'custom-blue-dark'
     },
     {
       id: 'container-platforms',
@@ -120,7 +120,7 @@ const VirtualizationPage = () => {
         { name: 'OpenShift', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/OpenShift-LogoType.svg/2560px-OpenShift-LogoType.svg.png' },
         { name: 'Rancher', logo: '/Logos/rancher.svg' }
       ],
-      gradient: 'from-yellow-600 to-orange-500'
+      gradient: 'custom-yellow-orange'
     }
   ];
 
@@ -157,162 +157,429 @@ const VirtualizationPage = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          <img
-            src="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
-            alt="Virtualization Infrastructure"
-            className="w-full h-full object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-blue-800/85 to-indigo-900/90"></div>
+      <section className="relative py-20 overflow-hidden" style={{ background: 'linear-gradient(135deg, #003161 0%, #001a3d 100%)' }}>
+        {/* Professional Grid Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FDEB9E' fill-opacity='0.3'%3E%3Cpath d='M0 0h40v40H0V0zm20 20h20v20H20V20z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }} />
         </div>
 
-        {/* Floating Server Effects */}
+        {/* Virtualization Animations */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(8)].map((_, i) => (
+          {/* Floating Server Icons */}
+          {Array.from({ length: 6 }).map((_, i) => (
             <motion.div
-              key={i}
-              className="absolute w-8 h-8 opacity-20"
+              key={`server-${i}`}
+              className="absolute"
               style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
+                left: `${15 + Math.random() * 70}%`,
+                top: `${20 + Math.random() * 60}%`,
               }}
               animate={{
-                y: [0, -30, 0],
-                rotate: [0, 180, 360],
-                opacity: [0.1, 0.3, 0.1],
+                y: [0, -20, 0],
+                opacity: [0.3, 0.7, 0.3],
+                scale: [0.8, 1, 0.8],
               }}
               transition={{
-                duration: 8 + Math.random() * 4,
+                duration: 4 + Math.random() * 2,
                 delay: Math.random() * 2,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-full h-full text-yellow-400">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
+              <Server size={24} style={{ color: '#FDEB9E' }} />
             </motion.div>
+          ))}
+
+          {/* VM Container Boxes */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <motion.div
+              key={`vm-${i}`}
+              className="absolute w-8 h-6 border border-yellow-400/30 rounded"
+              style={{
+                left: `${10 + Math.random() * 80}%`,
+                top: `${15 + Math.random() * 70}%`,
+                backgroundColor: 'rgba(253, 235, 158, 0.1)',
+              }}
+              animate={{
+                x: [0, 10, 0],
+                opacity: [0.2, 0.6, 0.2],
+                rotateY: [0, 180, 360],
+              }}
+              transition={{
+                duration: 6 + Math.random() * 3,
+                delay: Math.random() * 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+
+          {/* Network Connection Lines */}
+          <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+            {Array.from({ length: 4 }).map((_, i) => {
+              const startX = 20 + (i * 20);
+              const startY = 30 + (i * 15);
+              const endX = startX + 30;
+              const endY = startY + 20;
+
+              return (
+                <motion.line
+                  key={`line-${i}`}
+                  x1={`${startX}%`}
+                  y1={`${startY}%`}
+                  x2={`${endX}%`}
+                  y2={`${endY}%`}
+                  stroke="#FDEB9E"
+                  strokeWidth="1"
+                  strokeOpacity="0.3"
+                  strokeDasharray="5,5"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: [0, 1, 0] }}
+                  transition={{
+                    duration: 3,
+                    delay: i * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              );
+            })}
+          </svg>
+
+          {/* Hypervisor Layer Animation */}
+          <motion.div
+            className="absolute bottom-10 left-10 right-10 h-1 rounded-full"
+            style={{ backgroundColor: 'rgba(253, 235, 158, 0.2)' }}
+            animate={{
+              scaleX: [0.5, 1, 0.5],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Data Flow Particles */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                backgroundColor: '#FDEB9E',
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                x: [0, 50, -30, 0],
+                y: [0, -30, 20, 0],
+                opacity: [0, 1, 0.5, 0],
+                scale: [0, 1, 0.5, 0],
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                delay: Math.random() * 5,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
           ))}
         </div>
 
-        {/* Virtualization Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-
-        <div className="container relative z-10 text-white pt-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
+        <div className="container relative z-10 text-white">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+            {/* Left Content */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="mb-6">
+                <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase"
+                  style={{ backgroundColor: 'rgba(253, 235, 158, 0.1)', color: '#FDEB9E', border: '1px solid rgba(253, 235, 158, 0.3)' }}>
+                  Virtualization Excellence
+                </span>
+              </div>
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
+                Enterprise Virtualization Solutions
+              </h1>
+
+              <p className="text-xl mb-6 leading-relaxed" style={{ color: '#FDEB9E' }}>
+                <motion.span
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    opacity: [0.8, 1, 0.8]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  VMware
+                </motion.span>
+                , Proxmox,
+                <motion.span
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    opacity: [0.8, 1, 0.8]
+                  }}
+                  transition={{
+                    duration: 2,
+                    delay: 0.7,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  Nutanix
+                </motion.span>
+                ,
+                <motion.span
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    opacity: [0.8, 1, 0.8]
+                  }}
+                  transition={{
+                    duration: 2,
+                    delay: 1.4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  XCP-ng
+                </motion.span>
+                & Enterprise Hypervisors
+              </p>
+
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                Optimize your infrastructure with enterprise virtualization solutions that provide
+                scalability, efficiency, and high availability for your critical workloads and applications.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+                  style={{ backgroundColor: '#FDEB9E', color: '#003161' }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#f5e17a'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = '#FDEB9E'}
+                >
+                  <span>Plan Virtualization</span>
+                  <ArrowRight size={20} className="ml-2" />
+                </Link>
+                <Link
+                  to="/services"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-lg border-2 transition-all duration-300"
+                  style={{ borderColor: 'rgba(253, 235, 158, 0.3)', color: '#FDEB9E' }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'rgba(253, 235, 158, 0.1)';
+                    e.target.style.borderColor = '#FDEB9E';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'transparent';
+                    e.target.style.borderColor = 'rgba(253, 235, 158, 0.3)';
+                  }}
+                >
+                  View All Services
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Content - Animated Spiral */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-8"
+              className="flex justify-center items-center"
             >
-              <span className="text-lg font-medium text-yellow-400 tracking-wide uppercase">
-                Virtualization Excellence
-              </span>
-            </motion.div>
+              <div className="relative w-96 h-96 flex items-center justify-center">
+                {/* Professional Infrastructure Animation */}
+                <div className="absolute inset-0">
+                  <svg
+                    width="320"
+                    height="320"
+                    viewBox="0 0 320 320"
+                    className="w-full h-full"
+                  >
+                    <defs>
+                      <linearGradient id="professionalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#FDEB9E', stopOpacity: 0.8 }} />
+                        <stop offset="50%" style={{ stopColor: '#FDEB9E', stopOpacity: 0.4 }} />
+                        <stop offset="100%" style={{ stopColor: '#FDEB9E', stopOpacity: 0.1 }} />
+                      </linearGradient>
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                        <feMerge>
+                          <feMergeNode in="coloredBlur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8 text-white"
-            >
-              Virtualization Solutions
-            </motion.h1>
+                    {/* Clean Spiral Lines */}
+                    {Array.from({ length: 8 }).map((_, i) => {
+                      const centerX = 160;
+                      const centerY = 160;
+                      const angle = (i * 45) * (Math.PI / 180);
+                      const startRadius = 40;
+                      const endRadius = 120;
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-2xl text-yellow-300 mb-8 font-medium"
-            >
-              VMware, Proxmox, Nutanix & Enterprise Hypervisors
-            </motion.p>
+                      // Create smooth spiral curve
+                      const spiralTurns = 2;
+                      const points = [];
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-xl text-gray-300 mb-12 max-w-3xl leading-relaxed"
-            >
-              Optimize your infrastructure with enterprise virtualization solutions that provide
-              scalability, efficiency, and high availability for your critical workloads and applications.
-            </motion.p>
+                      for (let t = 0; t <= 1; t += 0.1) {
+                        const currentAngle = angle + (spiralTurns * Math.PI * 2 * t);
+                        const currentRadius = startRadius + (endRadius - startRadius) * t;
+                        const x = centerX + Math.cos(currentAngle) * currentRadius;
+                        const y = centerY + Math.sin(currentAngle) * currentRadius;
+                        points.push(`${x},${y}`);
+                      }
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-6"
-            >
-              <Link
-                to="/contact"
-                className="group inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                <span>Plan Virtualization</span>
+                      const pathData = `M ${points.join(' L ')}`;
+
+                      return (
+                        <motion.path
+                          key={i}
+                          d={pathData}
+                          fill="none"
+                          stroke="url(#professionalGradient)"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          filter="url(#glow)"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{
+                            pathLength: [0, 1, 0],
+                            opacity: [0, 0.8, 0]
+                          }}
+                          transition={{
+                            duration: 6,
+                            delay: i * 0.3,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      );
+                    })}
+
+                    {/* Concentric Circles */}
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <motion.circle
+                        key={`circle-${i}`}
+                        cx="160"
+                        cy="160"
+                        r={30 + (i * 25)}
+                        fill="none"
+                        stroke="#FDEB9E"
+                        strokeWidth="1"
+                        strokeOpacity="0.3"
+                        strokeDasharray="4,8"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{
+                          scale: [0.8, 1.1, 0.8],
+                          opacity: [0.2, 0.6, 0.2],
+                          rotate: [0, 360]
+                        }}
+                        transition={{
+                          duration: 8 + (i * 2),
+                          delay: i * 0.5,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
+                  </svg>
+                </div>
+
+                {/* Central Hub */}
                 <motion.div
-                  className="ml-3"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  className="absolute w-16 h-16 rounded-full border-2 flex items-center justify-center"
+                  style={{
+                    borderColor: '#FDEB9E',
+                    backgroundColor: 'rgba(253, 235, 158, 0.1)'
+                  }}
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    borderColor: ['#FDEB9E', '#f5e17a', '#FDEB9E']
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 >
-                  <ArrowRight size={20} />
+                  <motion.div
+                    className="w-6 h-6 rounded-full"
+                    style={{ backgroundColor: '#FDEB9E' }}
+                    animate={{
+                      scale: [0.8, 1.2, 0.8],
+                      opacity: [0.6, 1, 0.6]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
                 </motion.div>
-              </Link>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <div className="bg-white rounded-2xl p-12 shadow-lg border border-gray-200 relative overflow-hidden">
-              {/* Tech accent glow */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
-
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center relative">
-                  <Server size={32} className="text-white" />
-                  <motion.div
-                    className="absolute inset-0 bg-yellow-400/20 rounded-2xl"
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-3 gap-8 items-center">
+              {/* Left - Icon */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="flex justify-center lg:justify-start"
+              >
+                <div className="w-24 h-24 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #003161, #001a3d)' }}>
+                  <Server size={40} className="text-white" />
                 </div>
-              </div>
+              </motion.div>
 
-              <p className="text-xl text-gray-700 leading-relaxed font-light">
-                Virtualization is the foundation of modern IT infrastructure efficiency. At Atlas Defenders, we implement
-                enterprise-grade virtualization solutions using VMware vSphere, Proxmox, Nutanix, and other leading platforms
-                to maximize resource utilization, improve scalability, and ensure high availability for your critical systems.
-              </p>
+              {/* Center - Content */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="lg:col-span-2"
+              >
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase"
+                    style={{ backgroundColor: 'rgba(253, 235, 158, 0.1)', color: '#FDEB9E', border: '1px solid rgba(253, 235, 158, 0.3)' }}>
+                    About Our Solutions
+                  </span>
+                </div>
+                <h2 className="text-3xl font-bold mb-4" style={{ color: '#003161' }}>
+                  Foundation of Modern IT Infrastructure
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Virtualization is the foundation of modern IT infrastructure efficiency. At Atlas Defenders, we implement
+                  enterprise-grade virtualization solutions using VMware vSphere, Proxmox, Nutanix, and other leading platforms
+                  to maximize resource utilization, improve scalability, and ensure high availability for your critical systems.
+                </p>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Virtualization Solutions Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -321,7 +588,13 @@ const VirtualizationPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+            <div className="mb-4">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase"
+                style={{ backgroundColor: 'rgba(253, 235, 158, 0.1)', color: '#FDEB9E', border: '1px solid rgba(253, 235, 158, 0.3)' }}>
+                Our Platforms
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#003161' }}>
               Modern Virtualization Platforms
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -344,14 +617,37 @@ const VirtualizationPage = () => {
               >
                 <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-gray-300 overflow-hidden h-full">
                   {/* Header with gradient */}
-                  <div className={`bg-gradient-to-r ${category.gradient} p-6 text-white relative overflow-hidden`}>
+                  <div
+                    className="p-6 text-white relative overflow-hidden"
+                    style={{
+                      background: category.gradient === 'custom-blue' ? 'linear-gradient(to right, #003161, #001a3d)' :
+                        category.gradient === 'custom-yellow' ? 'linear-gradient(to right, #FDEB9E, #f5e17a)' :
+                          category.gradient === 'custom-blue-alt' ? 'linear-gradient(to right, #003161, #002a5c)' :
+                            category.gradient === 'custom-yellow-alt' ? 'linear-gradient(to right, #FDEB9E, #f0d875)' :
+                              category.gradient === 'custom-blue-dark' ? 'linear-gradient(to right, #001a3d, #003161)' :
+                                category.gradient === 'custom-yellow-orange' ? 'linear-gradient(to right, #FDEB9E, #f5d76e)' :
+                                  'linear-gradient(to right, #003161, #001a3d)'
+                    }}
+                  >
                     <motion.div
                       className="absolute inset-0 bg-white/10"
                       animate={hoveredCard === category.id ? { scale: [1, 1.1, 1] } : {}}
                       transition={{ duration: 0.6 }}
                     />
                     <div className="relative z-10">
-                      <h3 className="text-xl font-bold mb-2">{category.title}</h3>
+                      <h3
+                        className="text-xl font-bold mb-2"
+                        style={{
+                          color: (category.title === 'VMware vSphere' ||
+                            category.title === 'Nutanix AHV' ||
+                            category.title === 'XCP-ng') ? '#FDEB9E' :
+                            (category.title === 'Container Platforms' ||
+                              category.title === 'Microsoft Hyper-V' ||
+                              category.title === 'Proxmox VE') ? '#003161' : 'white'
+                        }}
+                      >
+                        {category.title}
+                      </h3>
                       <p className="text-white/90 text-sm">{category.description}</p>
                     </div>
                   </div>
@@ -387,7 +683,16 @@ const VirtualizationPage = () => {
 
                   {/* Hover pulse effect */}
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-r ${category.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl pointer-events-none`}
+                    className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl pointer-events-none"
+                    style={{
+                      background: category.gradient === 'custom-blue' ? 'linear-gradient(to right, #003161, #001a3d)' :
+                        category.gradient === 'custom-yellow' ? 'linear-gradient(to right, #FDEB9E, #f5e17a)' :
+                          category.gradient === 'custom-blue-alt' ? 'linear-gradient(to right, #003161, #002a5c)' :
+                            category.gradient === 'custom-yellow-alt' ? 'linear-gradient(to right, #FDEB9E, #f0d875)' :
+                              category.gradient === 'custom-blue-dark' ? 'linear-gradient(to right, #001a3d, #003161)' :
+                                category.gradient === 'custom-yellow-orange' ? 'linear-gradient(to right, #FDEB9E, #f5d76e)' :
+                                  'linear-gradient(to right, #003161, #001a3d)'
+                    }}
                   />
                 </div>
               </motion.div>
@@ -429,11 +734,11 @@ const VirtualizationPage = () => {
                   className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-200 group"
                 >
                   <div className="flex items-start">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-600/10 to-yellow-500/10 rounded-xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon size={24} className="text-blue-600" />
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(to bottom right, rgba(0, 49, 97, 0.1), rgba(253, 235, 158, 0.1))' }}>
+                      <Icon size={24} style={{ color: '#003161' }} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                      <h3 className="text-xl font-bold text-primary mb-3 transition-colors duration-300" style={{ color: '#003161' }}>
                         {reason.title}
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
@@ -449,12 +754,84 @@ const VirtualizationPage = () => {
       </section>
 
       {/* Success Metrics Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white relative overflow-hidden">
+      <section className="py-20 text-white relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #003161, #001a3d, #003161)' }}>
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
+        </div>
+
+        {/* Professional Spiral Animation */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20">
+          <motion.div
+            className="relative w-96 h-96 flex items-center justify-center"
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            <svg
+              width="384"
+              height="384"
+              viewBox="0 0 384 384"
+              className="w-full h-full"
+            >
+              <defs>
+                <linearGradient id="successGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{ stopColor: '#FDEB9E', stopOpacity: 0.6 }} />
+                  <stop offset="50%" style={{ stopColor: '#FDEB9E', stopOpacity: 0.3 }} />
+                  <stop offset="100%" style={{ stopColor: '#FDEB9E', stopOpacity: 0.1 }} />
+                </linearGradient>
+              </defs>
+
+              {/* Clean Spiral Lines */}
+              {Array.from({ length: 6 }).map((_, i) => {
+                const centerX = 192;
+                const centerY = 192;
+                const angle = (i * 60) * (Math.PI / 180);
+                const startRadius = 50;
+                const endRadius = 150;
+
+                const spiralTurns = 1.5;
+                const points = [];
+
+                for (let t = 0; t <= 1; t += 0.1) {
+                  const currentAngle = angle + (spiralTurns * Math.PI * 2 * t);
+                  const currentRadius = startRadius + (endRadius - startRadius) * t;
+                  const x = centerX + Math.cos(currentAngle) * currentRadius;
+                  const y = centerY + Math.sin(currentAngle) * currentRadius;
+                  points.push(`${x},${y}`);
+                }
+
+                const pathData = `M ${points.join(' L ')}`;
+
+                return (
+                  <motion.path
+                    key={i}
+                    d={pathData}
+                    fill="none"
+                    stroke="url(#successGradient)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{
+                      pathLength: [0, 1, 0],
+                      opacity: [0, 0.6, 0]
+                    }}
+                    transition={{
+                      duration: 8,
+                      delay: i * 0.4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                );
+              })}
+            </svg>
+          </motion.div>
         </div>
 
         <div className="container relative z-10">
@@ -488,14 +865,13 @@ const VirtualizationPage = () => {
                   className="text-center"
                 >
                   <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                    <Icon size={28} className="text-yellow-400" />
+                    <Icon size={28} style={{ color: '#FDEB9E' }} />
                   </div>
 
                   <div className="mb-4">
                     <Counter
                       end={metric.value}
                       suffix={metric.suffix}
-                      prefix={metric.prefix || ''}
                       duration={2.5}
                     />
                   </div>
@@ -518,7 +894,8 @@ const VirtualizationPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-12 md:p-16 text-white text-center relative overflow-hidden"
+            className="rounded-3xl p-12 md:p-16 text-white text-center relative overflow-hidden"
+            style={{ background: 'linear-gradient(to right, #003161, #001a3d)' }}
           >
             {/* Background Effects */}
             <div className="absolute inset-0 overflow-hidden opacity-20">
@@ -545,13 +922,19 @@ const VirtualizationPage = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
                   to="/contact"
-                  className="btn bg-yellow-400 text-blue-900 hover:bg-yellow-300 px-8 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  className="btn px-8 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  style={{ backgroundColor: '#FDEB9E', color: '#003161' }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#f5e17a'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = '#FDEB9E'}
                 >
                   Plan Virtualization
                 </Link>
                 <Link
                   to="/services"
-                  className="btn bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-all duration-300"
+                  className="btn px-8 py-4 rounded-full font-semibold transition-all duration-300"
+                  style={{ backgroundColor: 'white', color: '#003161' }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#f3f4f6'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
                 >
                   View All Infrastructure Services
                 </Link>
